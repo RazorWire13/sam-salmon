@@ -1,7 +1,10 @@
 'use strict';
 
 //Declare hours of operations (global array)
-var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+var hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1  pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm'];
+
+// Constructor function for Locations
+function Location(name, )
 
 // Declare object and properties (1st and Pike)
 var firstPike = {
@@ -54,12 +57,14 @@ firstPike.render = function() {
 
 firstPike.setCustomerPerHour();
 console.log('Hourly Customers ' + firstPike.hourlyCustomer);
+
 firstPike.setCookiePerHour();
 console.log('Hourly Cookie sales ' + firstPike.hourlyCookies);
+
 firstPike.setDailyCookieSales();
 console.log('Daily cookie sales ' + firstPike.totalCookieSales);
-firstPike.render();
 
+firstPike.render();
 
 
 // Declare object and properties (SeaTac)
@@ -114,10 +119,13 @@ seaTac.render = function() {
 
 seaTac.setCustomerPerHour();
 console.log('Hourly Customers ' + seaTac.hourlyCustomer);
+
 seaTac.setCookiePerHour();
 console.log('Hourly Cookie sales ' + seaTac.hourlyCookies);
+
 seaTac.setDailyCookieSales();
 console.log('Daily cookie sales ' + seaTac.totalCookieSales);
+
 seaTac.render();
 
 
@@ -173,12 +181,14 @@ seattleCenter.render = function() {
 
 seattleCenter.setCustomerPerHour();
 console.log('Hourly Customers ' + seattleCenter.hourlyCustomer);
+
 seattleCenter.setCookiePerHour();
 console.log('Hourly Cookie sales ' + seattleCenter.hourlyCookies);
+
 seattleCenter.setDailyCookieSales();
 console.log('Daily cookie sales ' + seattleCenter.totalCookieSales);
-seattleCenter.render();
 
+seattleCenter.render();
 
 
 // Declare object and properties (Capitol Hill)
@@ -233,12 +243,14 @@ capHill.render = function() {
 
 capHill.setCustomerPerHour();
 console.log('Hourly Customers ' + capHill.hourlyCustomer);
+
 capHill.setCookiePerHour();
 console.log('Hourly Cookie sales ' + capHill.hourlyCookies);
+
 capHill.setDailyCookieSales();
 console.log('Daily cookie sales ' + capHill.totalCookieSales);
-capHill.render();
 
+capHill.render();
 
 
 // Declare object and properties (Alki)
@@ -293,8 +305,19 @@ alki.render = function() {
 
 alki.setCustomerPerHour();
 console.log('Hourly Customers ' + alki.hourlyCustomer);
+
 alki.setCookiePerHour();
 console.log('Hourly Cookie sales ' + alki.hourlyCookies);
+
 alki.setDailyCookieSales();
 console.log('Daily cookie sales ' + alki.totalCookieSales);
+
 alki.render();
+
+// ------------ Table creation functionality --------------------
+
+// Holding array
+var allLocations = [];
+
+// Access to the DOM
+var cookieTable = document.getElementById('cookies');
