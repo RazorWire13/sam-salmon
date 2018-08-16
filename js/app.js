@@ -1,6 +1,6 @@
 'use strict';
 
-//Declare hours of operations (global array)
+// Declare hours of operations (global array)
 var hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm'];
 
 // Holding array for form data
@@ -115,8 +115,7 @@ function makeHeaderRow () {
   cookieTable.appendChild(trElem);
 }
 
-
-// ---------
+// Footer Row Function
 function makeFooterRow () {
   var trElem = document.createElement('tr');
   var thElem = document.createElement('th');
@@ -188,7 +187,11 @@ function handleNewStoreSubmit (event) {
 tableForm.addEventListener('submit', handleNewStoreSubmit);
 
 // Event listener for the 'Clear all comments' button
-clearFormFields.addEventListener('click', function() {
-  tableForm.innerHTML = '';
+clearFormFields.addEventListener('click', function(event) {
+  // Empties input fields
+  event.target.store.value = null;
+  event.target.min.value = null;
+  event.target.max.value = null;
+  event.target.avg.value = null;
   console.log('Cleared the form');
 });
