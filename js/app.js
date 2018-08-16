@@ -5,7 +5,7 @@ var hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1 pm', 
 
 // Holding array for form data
 var tableForm = document.getElementById('table-form');
-var clearFormFields = document.getElementById('clear-form-fields');
+var updateFormFields = document.getElementById('update-form-fields');
 
 // Holding array for locations
 var allLocations = [];
@@ -161,10 +161,6 @@ for (var i = 0; i < hours.length; i++) {
 // Verify store data passed into constructor
 console.table(allLocations);
 
-makeHeaderRow();
-renderAllLocations();
-makeFooterRow();
-
 // -------------------- FORM and EVENT FUNCTIONALITY ------------------------
 function handleNewStoreSubmit (event) {
   event.preventDefault();
@@ -182,16 +178,24 @@ function handleNewStoreSubmit (event) {
   console.table(allLocations);
 
   newStore.render();
-}
 
-tableForm.addEventListener('submit', handleNewStoreSubmit);
-
-// Event listener for the 'Clear all comments' button
-clearFormFields.addEventListener('click', function(event) {
-  // Empties input fields
   event.target.store.value = null;
   event.target.min.value = null;
   event.target.max.value = null;
   event.target.avg.value = null;
-  console.log('Cleared the form');
+}
+
+tableForm.addEventListener('submit', handleNewStoreSubmit);
+
+makeHeaderRow();
+renderAllLocations();
+makeFooterRow();
+
+updateFormFields.addEventListener('click', function() {
+  // Empties input fields
+  cookieTable.innerHTML = '';
+  console.log('You just cleared the chat list!');
+  makeHeaderRow();
+  renderAllLocations();
+  makeFooterRow();
 });
