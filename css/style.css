@@ -3,6 +3,8 @@ html {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
+
+
     background-size: cover;
   }
 
@@ -67,7 +69,7 @@ li {
     display: inline-block;
     font-family: 'Lato', sans-serif;
     font-size: 1.5em;
-    color: black;
+    color: yellow;
     margin-left: auto;
     margin-right: auto;
     width: 15%;
