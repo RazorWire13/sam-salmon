@@ -96,6 +96,7 @@ label {
 
 input {
     position: relative;
+    width: 80;
     font-size: 14pt;
     font-family: 'Lato', sans-serif;
     margin: 15px;
