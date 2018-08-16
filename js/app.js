@@ -3,11 +3,18 @@
 //Declare hours of operations (global array)
 var hours = ['6 am', '7 am', '8 am', '9 am', '10 am', '11 am', '12 pm', '1 pm', '2 pm', '3 pm', '4 pm', '5 pm', '6 pm', '7 pm'];
 
+// Holding array for form data
+var tableForm = document.getElementById('table-form');
+var clearFormFields = document.getElementById('clear-form-fields');
+
 // Holding array for locations
 var allLocations = [];
 
 // Access to the table in the DOM
 var cookieTable = document.getElementById('storeLoc');
+
+// Array footer cookie totals
+var totalCookiesEachHour = [];
 
 // Constructor function for locations
 function Stores (locName, minCustomers, maxCustomers, avgCookiePerSale) {
@@ -88,10 +95,11 @@ Stores.prototype.render = function() {
   cookieTable.appendChild(trElem);
 };
 
+// Header Row Function
 function makeHeaderRow () {
   var trElem = document.createElement('tr');
   var thElem = document.createElement('th');
-  thElem.textContent = '';
+  thElem.textContent = 'Location';
   trElem.appendChild(thElem);
   cookieTable.appendChild(trElem);
 
@@ -103,6 +111,27 @@ function makeHeaderRow () {
   }
   thElem = document.createElement('th');
   thElem.textContent = 'Total';
+  trElem.appendChild(thElem);
+  cookieTable.appendChild(trElem);
+}
+
+
+// ---------
+function makeFooterRow () {
+  var trElem = document.createElement('tr');
+  var thElem = document.createElement('th');
+  thElem.textContent = 'Hourly Total';
+  trElem.appendChild(thElem);
+  cookieTable.appendChild(trElem);
+
+  for (var i = 0; i < hours.length; i++) {
+    thElem = document.createElement('th');
+    thElem.textContent = totalCookiesEachHour[i];
+    trElem.appendChild(thElem);
+    cookieTable.appendChild(trElem);
+  }
+  thElem = document.createElement('th');
+  thElem.textContent = '';
   trElem.appendChild(thElem);
   cookieTable.appendChild(trElem);
 }
@@ -120,8 +149,46 @@ new Stores ('Seattle Center', 11, 38, 3.7);
 new Stores ('Capitol Hill', 20, 38, 2.3);
 new Stores ('Alki', 2, 16, 4.6);
 
+// Calculating hourly totals
+for (var i = 0; i < hours.length; i++) {
+  totalCookiesEachHour[i] = 0;
+  // console.log('test');
+  for (var k = 0; k < allLocations.length; k++) {
+    totalCookiesEachHour[i] += allLocations[k].hourlyCookies[i];
+  }
+  console.log(allLocations);
+}
+
 // Verify store data passed into constructor
 console.table(allLocations);
 
 makeHeaderRow();
 renderAllLocations();
+makeFooterRow();
+
+// -------------------- FORM and EVENT FUNCTIONALITY ------------------------
+function handleNewStoreSubmit (event) {
+  event.preventDefault();
+
+  if (!event.target.store.value || !event.target.min.value || !event.target.max.value || !event.target.avg.value) {
+    return alert ('Please make sure all fields are filled in properly!');
+  }
+
+  var newName = event.target.store.value;
+  var newMin = event.target.min.value;
+  var newMax = event.target.max.value;
+  var newAvg = event.target.avg.value;
+  var newStore = new Stores (newName, newMin, newMax, newAvg);
+
+  console.table(allLocations);
+
+  newStore.render();
+}
+
+tableForm.addEventListener('submit', handleNewStoreSubmit);
+
+// Event listener for the 'Clear all comments' button
+clearFormFields.addEventListener('click', function() {
+  tableForm.innerHTML = '';
+  console.log('Cleared the form');
+});
