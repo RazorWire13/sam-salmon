@@ -115,6 +115,18 @@ function makeHeaderRow () {
   cookieTable.appendChild(trElem);
 }
 
+// Calculating hourly totals
+function getTotalCookiesAllStoresPerHour () {
+  for (var i = 0; i < hours.length; i++) {
+    totalCookiesEachHour[i] = 0;
+    // console.log('test');
+    for (var k = 0; k < allLocations.length; k++) {
+      totalCookiesEachHour[i] += allLocations[k].hourlyCookies[i];
+    }
+    console.log(allLocations);
+  }
+}
+
 // Footer Row Function
 function makeFooterRow () {
   var trElem = document.createElement('tr');
@@ -148,16 +160,6 @@ new Stores ('Seattle Center', 11, 38, 3.7);
 new Stores ('Capitol Hill', 20, 38, 2.3);
 new Stores ('Alki', 2, 16, 4.6);
 
-// Calculating hourly totals
-for (var i = 0; i < hours.length; i++) {
-  totalCookiesEachHour[i] = 0;
-  // console.log('test');
-  for (var k = 0; k < allLocations.length; k++) {
-    totalCookiesEachHour[i] += allLocations[k].hourlyCookies[i];
-  }
-  console.log(allLocations);
-}
-
 // Verify store data passed into constructor
 console.table(allLocations);
 
@@ -173,11 +175,15 @@ function handleNewStoreSubmit (event) {
   var newMin = event.target.min.value;
   var newMax = event.target.max.value;
   var newAvg = event.target.avg.value;
-  var newStore = new Stores (newName, newMin, newMax, newAvg);
+  new Stores (newName, newMin, newMax, newAvg);
 
   console.table(allLocations);
 
-  newStore.render();
+  cookieTable.innerHTML = '';
+  makeHeaderRow();
+  renderAllLocations();
+  getTotalCookiesAllStoresPerHour();
+  makeFooterRow();
 
   event.target.store.value = null;
   event.target.min.value = null;
@@ -193,9 +199,9 @@ makeFooterRow();
 
 updateFormFields.addEventListener('click', function() {
   // Empties input fields
-  cookieTable.innerHTML = '';
+
   console.log('You just cleared the chat list!');
-  makeHeaderRow();
-  renderAllLocations();
-  makeFooterRow();
+  // makeHeaderRow();
+  // renderAllLocations();
+  // makeFooterRow();
 });
