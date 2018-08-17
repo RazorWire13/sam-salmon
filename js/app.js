@@ -195,6 +195,7 @@ tableForm.addEventListener('submit', handleNewStoreSubmit);
 
 makeHeaderRow();
 renderAllLocations();
+getTotalCookiesAllStoresPerHour();
 makeFooterRow();
 
 updateFormFields.addEventListener('click', function() {
